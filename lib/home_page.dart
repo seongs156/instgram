@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/feed_screen.dart';
+import 'package:instagram/screens/feed_screen.dart';
+import 'package:instagram/screens/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -32,21 +33,13 @@ class _HomePageState extends State<HomePage> {
     Container(
       color: Colors.greenAccent,
     ),
-    Container(
-      color: Colors.deepPurpleAccent,
-    ),
-    Container(
-      color: Colors.cyanAccent,
-    ),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index:_selectedIndex,
-        children:_screens
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
