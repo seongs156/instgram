@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:instagram/constants/common_size.dart';
+import 'package:instagram/constants/screen_size.dart';
 import 'package:instagram/widgets/comment.dart';
 import 'package:instagram/widgets/my_progress_indicator.dart';
 import 'package:instagram/widgets/rounded_avatar.dart';
@@ -16,13 +17,11 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _postHeader(),
-        _postImage(size),
+        _postImage(),
         _postActions(),
         _postLikes(),
         _postCaption(),
@@ -102,7 +101,7 @@ class Post extends StatelessWidget {
     );
   }
 
-  CachedNetworkImage _postImage(Size size) {
+  CachedNetworkImage _postImage() {
     return CachedNetworkImage(
       imageUrl: 'https://picsum.photos/id/$index/500/500',
       placeholder: (BuildContext context, String url) {
