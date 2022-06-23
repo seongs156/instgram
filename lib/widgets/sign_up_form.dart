@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
+import 'package:instagram/home_page.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -80,23 +81,22 @@ class _SignUpFormState extends State<SignUpForm> {
                   }
                 },
               ),
-              SizedBox(
-                height: 42,
-                child: FlatButton(
-                    color:Colors.blue,
-                    onPressed: (){
-                      if(_formKey.currentState!.validate()) {
+              Padding(
+                padding: const EdgeInsets.only(top: common_gap),
+                child: SizedBox(
+                  height: 42,
+                  child: FlatButton(
+                    color: Colors.blue,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
                         print("유효성검사 통과");
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage()));
                       }
-                  },
-                    child: Text(
-                      '로그인',
-                      style:TextStyle(
-                        color:Colors.white
-                      )
-                    ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6)
+                    },
+                    child: Text('로그인', style: TextStyle(color: Colors.white)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
                   ),
                 ),
               ),
@@ -109,26 +109,25 @@ class _SignUpFormState extends State<SignUpForm> {
 
   InputDecoration _textInputDecor(String hint) {
     return InputDecoration(
-                hintText: hint,
-                enabledBorder: _activeInputBorder(),
-                focusedBorder: _activeInputBorder(),
-                errorBorder: _errorInputBorder(),
-                focusedErrorBorder: _errorInputBorder(),
-                filled: true,
-                fillColor: Colors.grey[100]);
+        hintText: hint,
+        enabledBorder: _activeInputBorder(),
+        focusedBorder: _activeInputBorder(),
+        errorBorder: _errorInputBorder(),
+        focusedErrorBorder: _errorInputBorder(),
+        filled: true,
+        fillColor: Colors.grey[100]);
   }
 
   OutlineInputBorder _errorInputBorder() {
     return OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.redAccent),
-                  borderRadius: BorderRadius.circular(common_s_gap));
+        borderSide: BorderSide(color: Colors.redAccent),
+        borderRadius: BorderRadius.circular(common_s_gap));
   }
 
   OutlineInputBorder _activeInputBorder() {
     return OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(common_s_gap),
-
-              );
+      borderSide: BorderSide(color: Colors.black12),
+      borderRadius: BorderRadius.circular(common_s_gap),
+    );
   }
 }
