@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/home_page.dart';
+import 'package:instagram/screens/auth_screen.dart';
 
 import 'constants/material_white.dart';
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      home: HomePage(),
+      home: AuthScreen(),
+      // home: HomePage(),
       theme: ThemeData(primarySwatch: white),
     );
   }
