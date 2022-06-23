@@ -24,8 +24,8 @@ class ProfileSideMenu extends StatelessWidget {
               leading: Icon(Icons.exit_to_app, color: Colors.black87),
               title: Text('로그아웃'),
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()
-                ));
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => AuthScreen()));
               },
             ),
           ],

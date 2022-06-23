@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/constants/auth_input_decor.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/home_page.dart';
+import 'package:instagram/widgets/or_divider.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ class _SignUpFormState extends State<SignUpForm> {
               TextFormField(
                 controller: _emailController,
                 cursorColor: Colors.black54,
-                decoration: _textInputDecor('이메일'),
+                decoration: textInputDecor('이메일'),
                 validator: (text) {
                   if (text!.isNotEmpty && text.contains("@")) {
                     return null;
@@ -56,7 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 controller: _pwController,
                 cursorColor: Colors.black54,
                 obscureText: true,
-                decoration: _textInputDecor('비밀번호'),
+                decoration: textInputDecor('비밀번호'),
                 validator: (text) {
                   if (text!.isNotEmpty && text.length > 5) {
                     return null;
@@ -72,7 +74,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 controller: _cpwController,
                 cursorColor: Colors.black54,
                 obscureText: true,
-                decoration: _textInputDecor('비밀번호 확인'),
+                decoration: textInputDecor('비밀번호 확인'),
                 validator: (text) {
                   if (text!.isNotEmpty && _pwController.text == text) {
                     return null;
@@ -81,25 +83,21 @@ class _SignUpFormState extends State<SignUpForm> {
                   }
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: common_gap),
-                child: SizedBox(
-                  height: 42,
-                  child: FlatButton(
-                    color: Colors.blue,
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        print("유효성검사 통과");
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage()));
-                      }
-                    },
-                    child: Text('로그인', style: TextStyle(color: Colors.white)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                  ),
-                ),
+              SizedBox(
+                height: common_s_gap,
               ),
+              _submitButton(context),
+              SizedBox(
+                height: common_s_gap,
+              ),
+              OrDivider(),
+              TextButton.icon(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    primary: Colors.amberAccent,
+                  ),
+                  icon: ImageIcon(AssetImage('assets/images/facebook.png')),
+                  label: Text("카카오톡 로그인"))
             ],
           ),
         ),
@@ -107,27 +105,24 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  InputDecoration _textInputDecor(String hint) {
-    return InputDecoration(
-        hintText: hint,
-        enabledBorder: _activeInputBorder(),
-        focusedBorder: _activeInputBorder(),
-        errorBorder: _errorInputBorder(),
-        focusedErrorBorder: _errorInputBorder(),
-        filled: true,
-        fillColor: Colors.grey[100]);
-  }
-
-  OutlineInputBorder _errorInputBorder() {
-    return OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.redAccent),
-        borderRadius: BorderRadius.circular(common_s_gap));
-  }
-
-  OutlineInputBorder _activeInputBorder() {
-    return OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.black12),
-      borderRadius: BorderRadius.circular(common_s_gap),
+  Padding _submitButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: common_gap),
+      child: SizedBox(
+        height: 42,
+        child: FlatButton(
+          color: Colors.blue,
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              print("유효성검사 통과");
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => HomePage()));
+            }
+          },
+          child: Text('회원가입', style: TextStyle(color: Colors.white)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        ),
+      ),
     );
   }
 }
