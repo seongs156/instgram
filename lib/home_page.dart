@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/screen_size.dart';
+import 'package:instagram/screens/camera_screen.dart';
 import 'package:instagram/screens/feed_screen.dart';
 import 'package:instagram/screens/profile_screen.dart';
 
@@ -39,7 +40,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -56,9 +56,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onBtmItemClick(int index) {
+    print('인덱스');
+    print(index);
+    switch (index) {
+      case 2:
+        _openCamera();
+        break;
+      default:
+        {
+          setState(() {
+            _selectedIndex = index;
+          });
+        }
+    }
     // 상태변경 감지
-    setState(() {
-      _selectedIndex = index;
-    });
+  }
+
+  void _openCamera() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CameraScreen()));
   }
 }
