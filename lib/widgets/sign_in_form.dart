@@ -38,7 +38,8 @@ class _SignInFormState extends State<SignInForm> {
               ),
               Image.asset('assets/images/insta_text_logo.png'),
               TextFormField(
-                controller: _emailController,
+                // controller: _emailController,
+                initialValue: "test@test.net",
                 cursorColor: Colors.black54,
                 decoration: textInputDecor('이메일'),
                 validator: (text) {
@@ -53,7 +54,8 @@ class _SignInFormState extends State<SignInForm> {
                 height: common_xs_gap,
               ),
               TextFormField(
-                controller: _pwController,
+                // controller: _pwController,
+                initialValue: "qqqqqq",
                 cursorColor: Colors.black54,
                 obscureText: true,
                 decoration: textInputDecor('비밀번호'),
