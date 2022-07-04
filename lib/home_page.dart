@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/screen_size.dart';
 import 'package:instagram/screens/camera_screen.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   int _selectedIndex = 0;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   List<Widget> _screens = <Widget>[
     FeedScreen(),
@@ -42,8 +44,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-
     return Scaffold(
+      key: _key,
       body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
@@ -82,11 +84,12 @@ class _HomePageState extends State<HomePage> {
         action: SnackBarAction(
           label: 'OK',
           onPressed: () {
-            Scaffold.of(context).hideCurrentSnackBar();
+            _key.currentState?.hideCurrentSnackBar();
+            AppSettings.openAppSettings();
           },
         ),
       );
-      Scaffold.of(context).showSnackBar(snackBar);
+      _key.currentState?.showSnackBar(snackBar);
     }
   }
 
