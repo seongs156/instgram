@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/models/camera_state.dart';
+import 'package:instagram/models/gallery_state.dart';
+import 'package:instagram/widgets/my_gallery.dart';
 import 'package:instagram/widgets/take_photo.dart';
 import 'package:provider/provider.dart';
 
@@ -7,9 +9,11 @@ class CameraScreen extends StatefulWidget {
   CameraScreen({Key? key}) : super(key: key);
 
   CameraState _cameraState = CameraState();
+  GalleryState _galleryState = GalleryState();
   @override
   State<CameraScreen> createState() {
     _cameraState.getReadyToTakePhoto();
+    _galleryState.initProvider();
     return _CameraScreenState();
   }
 }
@@ -30,6 +34,7 @@ class _CameraScreenState extends State<CameraScreen> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CameraState>.value(value: widget._cameraState),
+        ChangeNotifierProvider<GalleryState>.value(value: widget._galleryState),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -38,7 +43,7 @@ class _CameraScreenState extends State<CameraScreen> {
         body: PageView(
           controller: _pageController,
           children: [
-            Container(color: Colors.cyanAccent),
+            MyGallery(),
             TakePhoto(),
             Container(color: Colors.greenAccent)
           ],
